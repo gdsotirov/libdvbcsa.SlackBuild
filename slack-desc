@@ -1,0 +1,16 @@
+libdvbcsa: libdvbcsa (A free implementation of DVB Common Scrambling Algorithm)
+libdvbcsa:
+libdvbcsa: libdvbcsa is a free implementation of the DVB Common Scrambling
+libdvbcsa: Algorithm with encryption and decryption capabilities.  The library
+libdvbcsa: has been successfully tested on different processors with 32 bits,
+libdvbcsa: 64 bits and 128 bits word width, little-endian and big-endian bytes
+libdvbcsa: ordering.
+libdvbcsa: The library performance comes in two flavors: a classical single
+libdvbcsa: packet implementation and a faster parallel bitslice implementation.
+libdvbcsa: The parallel implementation can take advantages of MMX, SSE or
+libdvbcsa: Altivec instruction sets.  Parallel implementation can process Mpeg
+libdvbcsa: TS packets at 300Mbps or more on recent processors.
+libdvbcsa: It's released under the General Public License, ensuring it will
+libdvbcsa: stay free, and used only for free software products.
+libdvbcsa:
+libdvbcsa: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
