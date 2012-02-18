@@ -1,14 +1,31 @@
 #!/bin/sh
 #
-# SlackBuild for libdvbcsa
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Slackware build script for libdvbcsa
+# Copyright (C) 2010,2012 Georgi D. Sotirov <gdsotirov@dir.bg>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
+# $Id: libdvbcsa.SlackBuild,v 1.2 2012/02/18 16:18:08 gsotirov Exp $
+#
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=libdvbcsa
-VERSION=1.0.1
+VERSION=1.1.0
 BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 
@@ -34,12 +51,11 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 1
+tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 3
 cd $SRC
 fix_source
 
 # Apply patches
-patch -p1 -b -z.orig < $CWD/$NAME-$VERSION.diff
 
 # Configure
 CFLAGS=$SLKCFLAGS \
@@ -52,12 +68,12 @@ CXXFLAGS=$SLKCFLAGS \
             --enable-shared=yes \
             --enable-static=no \
             --enable-mmx \
-            --enable-sse2 || exit 2
+            --enable-sse2 || exit 4
 
 # Build, check & install
-make -j4 || exit 3 
-make check || exit 4
-make DESTDIR=$PKG install || exit 5
+make -j4 || exit 5
+make check || exit 6
+make DESTDIR=$PKG install || exit 7
 
 # Prepare
 ( cd $PKG; strip_lib )
@@ -70,7 +86,6 @@ install -m 644 $CWD/slack-required $PKG/install/slack-required
 mkdir -p $PKG/usr/src/slackbuilds/$NAME-$VERSION
 install -m 644 $CWD/slack-desc          $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
 install -m 644 $CWD/slack-required      $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
-install -m 644 $CWD/$NAME-$VERSION.diff $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME-$VERSION.diff
 install -m 644 $CWD/$NAME.SlackBuild    $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
 
 # Pack
